@@ -58,7 +58,7 @@ const LoginPage = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="admin@demo.com"
+                  placeholder="you@example.com"
                   className="input-field pl-12"
                   id="login-email"
                 />
@@ -106,9 +106,6 @@ const LoginPage = () => {
           </p>
         </div>
 
-        <p className="text-center text-dark-500 text-xs mt-6">
-          Demo: admin@demo.com / admin123
-        </p>
       </div>
     </div>
   );
