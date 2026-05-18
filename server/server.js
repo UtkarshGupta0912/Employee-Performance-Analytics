@@ -19,10 +19,20 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: [
-    process.env.CLIENT_URL || 'http://localhost:5173',
-    'http://localhost:5173',
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    const allowed = [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      process.env.CLIENT_URL,
+    ].filter(Boolean);
+    // Allow any .onrender.com subdomain
+    if (allowed.includes(origin) || origin.endsWith('.onrender.com')) {
+      return callback(null, true);
+    }
+    return callback(null, true); // allow all for now (semester project)
+  },
   credentials: true,
 }));
 app.use(express.json());
